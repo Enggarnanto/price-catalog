@@ -8,7 +8,7 @@
       "resource_id": 18,
       "metadata": {
         "name": "INTER_TUTORINDO_BRILL",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum internasional, kelompok paket Brilliant. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 21,
@@ -19,7 +19,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Tutorindo kelompok paket Brilliant untuk kebutuhan belajar kurikulum internasional. Tabel memuat pilihan Brilliant 1, Brilliant 2, dan Brilliant 3 dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Pilih jenjang yang sesuai untuk membandingkan biaya ketiga pilihan paket.",
         "headers": [
           "JENJANG",
           "BRILLIANT 1",
@@ -313,7 +313,7 @@
       "resource_id": 17,
       "metadata": {
         "name": "NASPLUS_TUTORINDO_BRILL",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum nasional plus, kelompok paket Brilliant. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 20,
@@ -324,7 +324,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Tutorindo kelompok paket Brilliant untuk kebutuhan belajar kurikulum nasional plus. Tabel memuat pilihan Brilliant 1, Brilliant 2, dan Brilliant 3 dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Pilih jenjang yang sesuai untuk membandingkan biaya ketiga pilihan paket.",
         "headers": [
           "JENJANG",
           "BRILLIANT 1",
@@ -618,7 +618,7 @@
       "resource_id": 16,
       "metadata": {
         "name": "NAS_TUTORINDO_BRILL",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum nasional, kelompok paket Brilliant. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 19,
@@ -629,7 +629,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Tutorindo kelompok paket Brilliant untuk kebutuhan belajar kurikulum nasional. Tabel memuat pilihan Brilliant 1, Brilliant 2, dan Brilliant 3 dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Pilih jenjang yang sesuai untuk membandingkan biaya ketiga pilihan paket.",
         "headers": [
           "JENJANG",
           "BRILLIANT 1",
@@ -923,7 +923,7 @@
       "resource_id": 15,
       "metadata": {
         "name": "INTER_TUTORINDO_EXCEL",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum internasional, kelompok paket Excelent. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 18,
@@ -934,7 +934,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Daftar biaya program les privat Tutorindo kelompok paket Excelent untuk kurikulum internasional. Harga disajikan berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Gunakan rincian pada setiap kolom untuk membandingkan pilihan paket Excelent sesuai jenjang belajar.",
         "headers": [
           "Paket",
           "EXCELENT 1",
@@ -1228,7 +1228,7 @@
       "resource_id": 14,
       "metadata": {
         "name": "NASPLUS_TUTORINDO_EXCEL",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum nasional plus, kelompok paket Excelent. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 17,
@@ -1239,7 +1239,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Daftar biaya program les privat Tutorindo kelompok paket Excelent untuk kurikulum nasional plus. Harga disajikan berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Gunakan rincian pada setiap kolom untuk membandingkan pilihan paket Excelent sesuai jenjang belajar.",
         "headers": [
           "JENJANG",
           "EXCELENT 1",
@@ -1533,7 +1533,7 @@
       "resource_id": 13,
       "metadata": {
         "name": "NAS_TUTORINDO_EXCEL",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum nasional, kelompok paket Excelent. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 16,
@@ -1544,7 +1544,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Daftar biaya program les privat Tutorindo kelompok paket Excelent untuk kurikulum nasional. Harga disajikan berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Gunakan rincian pada setiap kolom untuk membandingkan pilihan paket Excelent sesuai jenjang belajar.",
         "headers": [
           "JENJANG",
           "EXCELENT 1",
@@ -1838,7 +1838,7 @@
       "resource_id": 12,
       "metadata": {
         "name": "INTER_TUTORINDO_PCG",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum internasional, kelompok paket Pintar, Cerdas, dan Genius. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 15,
@@ -1849,7 +1849,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Tutorindo untuk kebutuhan belajar dengan kurikulum internasional. Tersedia pilihan paket Pintar, Cerdas, dan Genius dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Bandingkan harga setiap paket pada tabel untuk memilih sesuai jenjang dan kebutuhan belajar.",
         "headers": [
           "JENJANG",
           "PINTAR",
@@ -2143,7 +2143,7 @@
       "resource_id": 10,
       "metadata": {
         "name": "NAS_TUTORINDO_PCG",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum nasional, kelompok paket Pintar, Cerdas, dan Genius. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 14,
@@ -2154,7 +2154,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Tutorindo untuk kebutuhan belajar dengan kurikulum nasional. Tersedia pilihan paket Pintar, Cerdas, dan Genius dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Bandingkan harga setiap paket pada tabel untuk memilih sesuai jenjang dan kebutuhan belajar.",
         "headers": [
           "JENJANG",
           "pintar",
@@ -2448,7 +2448,7 @@
       "resource_id": 11,
       "metadata": {
         "name": "NASPLUS_TUTORINDO_PCG",
-        "description": ""
+        "description": "Tabel harga program reguler Tutorindo untuk kurikulum nasional plus, kelompok paket Pintar, Cerdas, dan Genius. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 13,
@@ -2459,7 +2459,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Tutorindo untuk kebutuhan belajar dengan kurikulum nasional plus. Tersedia pilihan paket Pintar, Cerdas, dan Genius dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Bandingkan harga setiap paket pada tabel untuk memilih sesuai jenjang dan kebutuhan belajar.",
         "headers": [
           "JENJANG",
           "PINTAR",
@@ -2749,7 +2749,7 @@
       "resource_id": 9,
       "metadata": {
         "name": "INTER_BRILL_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum internasional, kelompok paket Brilliant. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 11,
@@ -2760,7 +2760,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Latisedu kelompok paket Brilliant untuk kebutuhan belajar kurikulum internasional. Tabel memuat pilihan Brilliant 1, Brilliant 2, dan Brilliant 3 dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Pilih jenjang yang sesuai untuk membandingkan biaya ketiga pilihan paket.",
         "headers": [
           "JENJANG",
           "BRILLIANT 1",
@@ -3054,7 +3054,7 @@
       "resource_id": 8,
       "metadata": {
         "name": "NASPLUS_BRILL_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum nasional plus, kelompok paket Brilliant. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 10,
@@ -3065,7 +3065,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Latisedu kelompok paket Brilliant untuk kebutuhan belajar kurikulum nasional plus. Tabel memuat pilihan Brilliant 1, Brilliant 2, dan Brilliant 3 dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Pilih jenjang yang sesuai untuk membandingkan biaya ketiga pilihan paket.",
         "headers": [
           "JENJANG",
           "BRILLIANT 1",
@@ -3359,7 +3359,7 @@
       "resource_id": 7,
       "metadata": {
         "name": "NAS_BRILL_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum nasional, kelompok paket Brilliant. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 9,
@@ -3370,7 +3370,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Latisedu kelompok paket Brilliant untuk kebutuhan belajar kurikulum nasional. Tabel memuat pilihan Brilliant 1, Brilliant 2, dan Brilliant 3 dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Pilih jenjang yang sesuai untuk membandingkan biaya ketiga pilihan paket.",
         "headers": [
           "JENJANG",
           "BRILLIANT 1",
@@ -3664,7 +3664,7 @@
       "resource_id": 6,
       "metadata": {
         "name": "INTER_EXCEL_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum internasional, kelompok paket Excelent. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 8,
@@ -3675,7 +3675,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Daftar biaya program les privat Latisedu kelompok paket Excelent untuk kurikulum internasional. Harga disajikan berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Gunakan rincian pada setiap kolom untuk membandingkan pilihan paket Excelent sesuai jenjang belajar.",
         "headers": [
           "JENJANG",
           "EXCELENT 1",
@@ -3969,7 +3969,7 @@
       "resource_id": 5,
       "metadata": {
         "name": "NASPLUS_EXCEL_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum nasional plus, kelompok paket Excelent. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 7,
@@ -3980,7 +3980,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Daftar biaya program les privat Latisedu kelompok paket Excelent untuk kurikulum nasional plus. Harga disajikan berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Gunakan rincian pada setiap kolom untuk membandingkan pilihan paket Excelent sesuai jenjang belajar.",
         "headers": [
           "JENJANG",
           "EXCELENT 1",
@@ -4274,7 +4274,7 @@
       "resource_id": 3,
       "metadata": {
         "name": "INTER_PCG_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum internasional, kelompok paket Pintar, Cerdas, dan Genius. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 6,
@@ -4285,7 +4285,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Latisedu untuk kebutuhan belajar dengan kurikulum internasional. Tersedia pilihan paket Pintar, Cerdas, dan Genius dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Bandingkan harga setiap paket pada tabel untuk memilih sesuai jenjang dan kebutuhan belajar.",
         "headers": [
           "JENJANG",
           "PINTAR",
@@ -4579,7 +4579,7 @@
       "resource_id": 4,
       "metadata": {
         "name": "NAS_EXCEL_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum nasional, kelompok paket Excelent. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 5,
@@ -4590,7 +4590,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Daftar biaya program les privat Latisedu kelompok paket Excelent untuk kurikulum nasional. Harga disajikan berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Gunakan rincian pada setiap kolom untuk membandingkan pilihan paket Excelent sesuai jenjang belajar.",
         "headers": [
           "JENJANG",
           "EXCELENT 1",
@@ -4884,7 +4884,7 @@
       "resource_id": 2,
       "metadata": {
         "name": "NASPLUS_PCG_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum nasional plus, kelompok paket Pintar, Cerdas, dan Genius. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 3,
@@ -4895,7 +4895,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Latisedu untuk kebutuhan belajar dengan kurikulum nasional plus. Tersedia pilihan paket Pintar, Cerdas, dan Genius dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Bandingkan harga setiap paket pada tabel untuk memilih sesuai jenjang dan kebutuhan belajar.",
         "headers": [
           "JENJANG",
           "PINTAR",
@@ -5189,7 +5189,7 @@
       "resource_id": 1,
       "metadata": {
         "name": "NAS_PCG_LATISEDU",
-        "description": ""
+        "description": "Tabel harga program reguler Latisedu untuk kurikulum nasional, kelompok paket Pintar, Cerdas, dan Genius. Memuat biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa."
       },
       "source": "published",
       "production_version_id": 2,
@@ -5200,7 +5200,7 @@
           "new_tab": false,
           "url": ""
         },
-        "description": "",
+        "description": "Program les privat Latisedu untuk kebutuhan belajar dengan kurikulum nasional. Tersedia pilihan paket Pintar, Cerdas, dan Genius dengan biaya berdasarkan jenjang TK/Mengaji, SD, SMP, SMA, umum, dan mahasiswa. Bandingkan harga setiap paket pada tabel untuk memilih sesuai jenjang dan kebutuhan belajar.",
         "headers": [
           "JENJANG",
           "PINTAR",

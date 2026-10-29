@@ -2,11 +2,11 @@
 defined('ABSPATH') || exit;
 
 final class LPM_Schema {
-    public const VERSION = '4';
+    public const VERSION = '5';
 
     public static function table(string $name): string {
         global $wpdb;
-        if (!in_array($name, ['resources', 'resource_versions', 'cache_events', 'usage', 'usage_refs'], true)) {
+        if (!in_array($name, ['resources', 'resource_versions', 'cache_events', 'usage', 'usage_refs', 'import_operations'], true)) {
             throw new InvalidArgumentException('Unknown table.');
         }
         return $wpdb->prefix . 'lpm_' . $name;
@@ -28,6 +28,15 @@ final class LPM_Schema {
         $r = self::table('resources');
         $v = self::table('resource_versions');
         $c = self::table('cache_events');
+        $imports=self::table('import_operations');
+        dbDelta("CREATE TABLE $imports (
+            operation_key varchar(64) NOT NULL,
+            payload_hash char(64) NOT NULL,
+            resource_id bigint unsigned DEFAULT NULL,
+            draft_revision bigint unsigned NOT NULL DEFAULT 0,
+            created_at datetime NOT NULL,
+            PRIMARY KEY  (operation_key)
+        ) ENGINE=InnoDB $collate;");
         dbDelta("CREATE TABLE $r (
             id bigint unsigned NOT NULL AUTO_INCREMENT,
             resource_type varchar(20) NOT NULL,
@@ -104,7 +113,7 @@ final class LPM_Schema {
 
     public static function ready(): void {
         global $wpdb;
-        foreach (['resources', 'resource_versions', 'cache_events', 'usage', 'usage_refs'] as $name) {
+        foreach (['resources', 'resource_versions', 'cache_events', 'usage', 'usage_refs', 'import_operations'] as $name) {
             $engine = $wpdb->get_var($wpdb->prepare(
                 'SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s',
                 self::table($name)

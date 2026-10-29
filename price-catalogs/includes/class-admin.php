@@ -17,14 +17,14 @@ final class LPM_Admin {
             // The SVG wrapper itself is 20px even before our scoped CSS loads.
             $library_cap=current_user_can('edit_posts')?'edit_posts':'edit_pages';
             add_menu_page('Pricelist', 'Pricelist', $library_cap, 'lpm', [self::class, 'page'], self::logo_url() ? plugins_url('assets/menu-icon.svg',LPM_FILE) : 'dashicons-tag', 58);
-            foreach ([['lpm','All Tables',$library_cap],['lpm-new-table','Add New Table','manage_options'],['lpm-import','Import CSV','manage_options'],['lpm-catalogs','All Catalogs',$library_cap],['lpm-new-catalog','Add New Catalog','manage_options'],['lpm-styling','Styling','manage_options']] as [$slug,$label,$cap]) {
+            foreach ([['lpm','All Tables',$library_cap],['lpm-new-table','Add New Table','manage_options'],['lpm-import','Import CSV','manage_options'],['lpm-import-json','Import JSON','manage_options'],['lpm-catalogs','All Catalogs',$library_cap],['lpm-new-catalog','Add New Catalog','manage_options'],['lpm-styling','Styling','manage_options']] as [$slug,$label,$cap]) {
                 add_submenu_page('lpm',$label,$label,$cap,$slug,[self::class,'page']);
             }
         });
         add_action('admin_enqueue_scripts', static function ($hook) {
             // The sidebar exists on every admin screen, including Dashboard.
             wp_enqueue_style('lpm-menu', plugins_url('assets/admin-menu.css', LPM_FILE), [], LPM_VERSION);
-            if (!in_array(sanitize_key($_GET['page']??''),['lpm','lpm-new-table','lpm-import','lpm-catalogs','lpm-new-catalog','lpm-styling'],true)) { return; }
+            if (!in_array(sanitize_key($_GET['page']??''),['lpm','lpm-new-table','lpm-import','lpm-import-json','lpm-catalogs','lpm-new-catalog','lpm-styling'],true)) { return; }
             wp_enqueue_media();
             wp_enqueue_style('lpm-public', plugins_url('assets/public.css', LPM_FILE), [], LPM_VERSION);
             wp_enqueue_style('lpm-admin', plugins_url('assets/admin.css', LPM_FILE), [], LPM_VERSION);
@@ -61,12 +61,13 @@ final class LPM_Admin {
             ['/resources/(?P<id>\d+)/save', 'POST', 'save'], ['/resources/(?P<id>\d+)/review', 'GET', 'review'],
             ['/resources/(?P<id>\d+)/publish', 'POST', 'publish'], ['/resources/(?P<id>\d+)/history', 'GET', 'history'],
             ['/resources/(?P<id>\d+)/usage','GET','usage'], ['/resources/(?P<id>\d+)/published','GET','published'],
-            ['/styling','GET,POST','styling'], ['/preview','POST','preview'], ['/csv','POST','csv'], ['/usage/rebuild','POST','rebuild'],
+            ['/styling','GET,POST','styling'], ['/preview','POST','preview'], ['/csv','POST','csv'], ['/json/preview','POST','json_preview'], ['/json/import','POST','json_import'], ['/usage/rebuild','POST','rebuild'],
             ['/cache/retry', 'POST', 'retry'], ['/resources/(?P<id>\d+)/status','POST','status'], ['/resources/(?P<id>\d+)/delete','POST','delete']] as [$route, $method, $handler]) {
             register_rest_route('lpm/v1', $route, ['methods' => $method, 'permission_callback' => [self::class, 'permission'],
                 'callback' => static function (WP_REST_Request $request) use ($handler) {
                     try {
-                        if (strlen((string) $request->get_body()) > ($handler==='csv'?12582912:LPM_Content::MAX_BYTES+32768)) { throw new InvalidArgumentException('Payload terlalu besar.'); }
+                        $limit=$handler==='json_preview'?LPM_JSON_Import::MAX_BYTES*2+32768:($handler==='csv'?12582912:LPM_Content::MAX_BYTES+65536);
+                        if (strlen((string) $request->get_body()) > $limit) { throw new InvalidArgumentException('Payload terlalu besar.'); }
                         return rest_ensure_response(self::$handler($request));
                     } catch (Throwable $e) {
                         $status = $e instanceof LPM_Persistence_Error ? 503 : ($e instanceof LPM_Conflict ? 409 : (($e instanceof InvalidArgumentException || $e instanceof JsonException) ? 422 : ($e->getCode() === 403 ? 403 : 500)));
@@ -174,6 +175,14 @@ final class LPM_Admin {
     public static function retry(WP_REST_Request $r): array { LPM_Cache::process(true); return ['ok' => true]; }
     public static function styling(WP_REST_Request $r): array { return $r->get_method()==='POST'?LPM_Styling::save((array)$r['values']):LPM_Styling::get(); }
     public static function csv(WP_REST_Request $r): array { return LPM_CSV::parse((string)$r['csv'],(string)($r['delimiter']??','),$r['header']!==false); }
+    public static function json_preview(WP_REST_Request $r): array {
+        if(!is_string($r['json'])||!is_string($r['mode']))throw new InvalidArgumentException('File atau mode JSON tidak valid.');
+        return LPM_JSON_Import::preview($r['json'],$r['mode']);
+    }
+    public static function json_import(WP_REST_Request $r): array {
+        if(!is_array($r['item'])||!is_string($r['preview_token'])||!is_string($r['operation_key']))throw new InvalidArgumentException('Payload import tidak valid.');
+        return LPM_JSON_Import::apply($r['item'],$r['preview_token'],$r['operation_key']);
+    }
     public static function rebuild(WP_REST_Request $r): array { return LPM_Usage::step($r['reset']===true); }
     public static function published(WP_REST_Request $r): array {
         $resource=LPM_Service::resource(self::integer($r,'id'));

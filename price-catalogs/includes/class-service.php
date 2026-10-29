@@ -153,6 +153,44 @@ final class LPM_Service {
         });
     }
 
+    /** Import one draft and its retry receipt in the same InnoDB transaction. */
+    public static function import_draft(array $record,array $target,string $key): array {
+        global $wpdb;self::authorize();LPM_Schema::ready();
+        if(!preg_match('/^[a-zA-Z0-9_-]{20,64}$/D',$key))throw new InvalidArgumentException('Operation key import tidak valid.');
+        if(self::$transaction_connection!==null)throw new RuntimeException('Nested import transaction rejected.');
+        $content=LPM_Content::validate($record['type'],$record['content']);$json=LPM_Content::json($content);
+        $payload=hash('sha256',LPM_Content::json(['record'=>$record,'target_id'=>$target['id']]));$table=LPM_Schema::table('import_operations');
+        self::$transaction_connection=self::connection();
+        try{
+            if(!mysqli_begin_transaction(self::connection()))throw new LPM_Persistence_Error('Transaksi import gagal dimulai.');
+            self::query($wpdb->prepare("INSERT INTO $table (operation_key,payload_hash,created_at) VALUES (%s,%s,%s) ON DUPLICATE KEY UPDATE operation_key=VALUES(operation_key)",$key,$payload,gmdate('Y-m-d H:i:s')));
+            $receipt=self::row($wpdb->prepare("SELECT * FROM $table WHERE operation_key=%s FOR UPDATE",$key));
+            if(!$receipt||!hash_equals($payload,$receipt['payload_hash']))throw new LPM_Conflict('Identitas import sudah dipakai untuk data berbeda. Preview ulang dengan batch baru.');
+            $replayed=!empty($receipt['resource_id']);
+            if($replayed){$id=(int)$receipt['resource_id'];$revision=(int)$receipt['draft_revision'];}
+            else{
+                $id=$target['id'];
+                if(!$id){$id=self::insert(LPM_Schema::table('resources'),['resource_type'=>$record['type'],'name'=>$record['metadata']['name'],'description'=>$record['metadata']['description'],'updated_at'=>gmdate('Y-m-d H:i:s'),'updated_by'=>get_current_user_id()]);}
+                $r=self::row($wpdb->prepare('SELECT * FROM '.LPM_Schema::table('resources').' WHERE id=%d FOR UPDATE',$id));
+                if(!$r||!empty($r['deleted_at'])||$r['resource_type']!==$record['type'])throw new LPM_Conflict('Resource tujuan tidak tersedia atau jenisnya berbeda.');
+                self::check_revision($r,$target['revision']);
+                $production=(int)$r['production_version_id'];$base=$r['draft_data']!==null?(int)$r['draft_base_version_id']:$production;
+                if($production!==$target['production']||$base!==$target['base'])throw new LPM_Conflict('Versi tujuan berubah setelah preview. Preview ulang sebelum import.');
+                if($r['name']!==$record['metadata']['name'])LPM_Shortcode::remember($r);
+                $revision=(int)$r['draft_revision']+1;
+                self::update(['name'=>$record['metadata']['name'],'description'=>$record['metadata']['description'],'draft_data'=>$json,'draft_revision'=>$revision,'draft_base_version_id'=>$base?:null,'draft_updated_at'=>gmdate('Y-m-d H:i:s'),'draft_updated_by'=>get_current_user_id(),'updated_at'=>gmdate('Y-m-d H:i:s'),'updated_by'=>get_current_user_id()],$id);
+                $saved=self::row($wpdb->prepare('SELECT draft_data,draft_revision,name,description FROM '.LPM_Schema::table('resources').' WHERE id=%d',$id));
+                if(!$saved||$saved['draft_data']!==$json||(int)$saved['draft_revision']!==$revision||$saved['name']!==$record['metadata']['name']||$saved['description']!==$record['metadata']['description'])throw new RuntimeException('Draft hasil import belum tersimpan lengkap.');
+                self::query($wpdb->prepare("UPDATE $table SET resource_id=%d,draft_revision=%d WHERE operation_key=%s",$id,$revision,$key));
+            }
+            self::fault('before_transaction_commit');if(!mysqli_commit(self::connection()))throw new LPM_Persistence_Error('Commit import belum terkonfirmasi.');self::fault('after_transaction_commit');
+            $observer=LPM_Database::open();try{$verified=LPM_Database::row($wpdb->prepare("SELECT resource_id,draft_revision,payload_hash FROM $table WHERE operation_key=%s",$key),$observer);}finally{mysqli_close($observer);}
+            if(!$verified||(int)$verified['resource_id']!==$id||(int)$verified['draft_revision']!==$revision||!hash_equals($payload,$verified['payload_hash']))throw new LPM_Persistence_Error('Hasil import belum terverifikasi. Coba ulang batch yang sama.');
+            return ['id'=>$id,'revision'=>$revision,'persisted'=>true,'replayed'=>$replayed,'type'=>$record['type'],'name'=>$record['metadata']['name']];
+        }catch(Throwable $e){try{mysqli_rollback(self::connection());}catch(Throwable $ignored){}throw $e;}
+        finally{self::$transaction_connection=null;}
+    }
+
     public static function publish(int $id, int $revision, int $expected_production, string $summary, string $key, ?int $restore_id = null): array {
         self::authorize();
         if (!preg_match('/^[a-zA-Z0-9_-]{20,64}$/D', $key)) { throw new InvalidArgumentException('Operation key tidak valid.'); }
