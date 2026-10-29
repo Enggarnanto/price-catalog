@@ -1,6 +1,6 @@
 <?php
 require __DIR__.'/bootstrap.php';require_once ABSPATH.'wp-admin/includes/file.php';require_once ABSPATH.'wp-admin/includes/class-wp-upgrader.php';
-LPM_Updater::boot();$checks=0;$requests=0;$mode='ok';$version='2.3.1';$feed='https://example.com/lpm-update.json';$package='https://example.com/lpm-plugin.zip';
+LPM_Updater::boot();$checks=0;$requests=0;$mode='ok';$version='2.4.1';$feed='https://example.com/lpm-update.json';$package='https://example.com/lpm-plugin.zip';
 function check($ok,$label){global $checks;if(!$ok)throw new RuntimeException($label);echo 'PASS '.(++$checks).' '.$label."\n";}
 function rejects($fn,$label){try{$fn();}catch(Throwable $e){check(true,$label);return;}throw new RuntimeException($label);}
 $folder=__DIR__.'/runtime/updater';if(!is_dir($folder))mkdir($folder,0777,true);

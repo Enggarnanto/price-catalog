@@ -1,11 +1,11 @@
-# Latis Price Catalogs 2.3.0
+# Latis Price Catalogs 2.4.0
 
 Kelola tabel harga dan katalog gambar di satu tempat. Penulis menempel shortcode ke artikel; pembaruan berikutnya dilakukan pada resource yang sama tanpa mengedit artikel satu per satu.
 
 ## Instalasi / upgrade
 
 1. Buka **Plugins > Add New > Upload Plugin**.
-2. Unggah `price-catalogs.zip` (versi 2.3.0) dan pilih mengganti plugin lama jika WordPress menawarkannya. Folder plugin tetap `price-catalogs`; tidak perlu menghapus plugin atau membuat ulang tabel.
+2. Unggah `price-catalogs.zip` (versi 2.4.0) dan pilih mengganti plugin lama jika WordPress menawarkannya. Folder plugin tetap `price-catalogs`; tidak perlu menghapus plugin atau membuat ulang tabel.
 3. Aktifkan plugin bila belum aktif, lalu buka menu **Pricelist**.
 4. Data versi lama tetap tersimpan. Buka resource lama, periksa hasil pemetaan, pilih Category Program untuk tabel, dan simpan draft sebelum publish format baru.
 5. Jalankan **Rebuild indeks artikel** untuk mendata konten yang sudah ada sebelum upgrade.
@@ -13,6 +13,19 @@ Kelola tabel harga dan katalog gambar di satu tempat. Penulis menempel shortcode
 Persyaratan: WordPress 6.2+, PHP 8.1+ dengan mysqli, MySQL 5.7+ atau MariaDB 10.3+ dengan fungsi JSON, serta InnoDB. Runtime yang diuji: WordPress 6.8.3, PHP 8.1.10, MySQL 8.0.30. MariaDB dan versi minimum lainnya belum diuji langsung.
 
 Snapshot schema v1 tetap dapat dirender dan dipulihkan melalui plugin v2. Jangan downgrade berkas ke 1.0.0 setelah menerbitkan schema v2; renderer versi lama tidak mengenali schema baru. Gunakan Version History pada v2 untuk memulihkan konten.
+
+## Import JSON (2.4.0)
+
+Buka **Pricelist → Import JSON**, pilih file export JSON atau cadangan lokal, lalu pilih tujuan dan klik **Preview JSON**.
+
+- **Buat item baru:** membuat salinan dengan ID baru. Shortcode lama tidak dialihkan otomatis.
+- **Perbarui berdasarkan ID:** mengganti draft pada ID yang ada. Untuk file 18 program di `PRICELIST_GALIH` dari situs yang sama, pilih mode ini agar ID dan shortcode tetap.
+- Periksa nama tujuan, deskripsi, sampel data dan peringatan; centang item lalu **Import pilihan ke Draft**. Tidak ada publish otomatis dan harga terbit tidak berubah.
+- Nama/deskripsi, harga, format, hyperlink, footer/CTA dan toggle tampil dipertahankan. File tidak mengaktifkan deskripsi yang sebelumnya dimatikan.
+- JSON UTF-8 (boleh BOM), maksimal 10 MiB / 200 resource. Gambar tidak diunggah; ID media yang tidak cocok perlu dipilih ulang dari Media Library sebelum publish.
+- Hasil dilaporkan per item. Ulangi batch yang sama jika respons terputus; receipt transaksi mencegah duplikasi. Klik **Mulai batch baru** hanya bila memang ingin operasi import baru.
+
+Lihat [panduan Import JSON](docs/import-json.md) untuk format, konflik versi, retry dan batas pemulihan. Database schema 5 menambahkan receipt import; format snapshot harga tidak berubah.
 
 ## Updater plugin (2.3.0)
 
@@ -152,7 +165,7 @@ Klik **Hapus** di daftar, atau **Opsi lainnya ? Hapus tabel/katalog** di editor.
 - Pilih **CSV** untuk Excel/Google Sheets atau **JSON** untuk struktur konten lengkap, link, CTA dan pengaturan tampilan per resource.
 - Pilih draft terbaru/isian layar atau **Versi terbit saja**. Export massal versi terbit melewati item yang belum dipublikasikan; export satu item yang belum terbit menampilkan pesan kesalahan.
 - CSV tabel mencantumkan ID, metadata, header dan baris data dalam urutan grid asli (orientasi dicatat terpisah). CSV katalog memuat urutan gambar, URL, alt, caption, harga, hyperlink dan CTA. Semua CSV memakai UTF-8 BOM dan mengamankan teks yang dapat dibaca sebagai formula spreadsheet dengan awalan apostrof.
-- JSON tidak menyertakan riwayat versi, opsi styling global atau berkas gambar asli. URL dan ID gambar tetap disertakan. Import JSON belum tersedia; CSV export memakai metadata sehingga bukan format untuk langsung diimpor ulang lewat Import CSV.
+- JSON tidak menyertakan riwayat versi, opsi styling global atau berkas gambar asli. URL dan ID gambar tetap disertakan. Import ulang JSON tersedia melalui menu Import JSON; CSV export memakai metadata sehingga bukan format untuk langsung diimpor ulang lewat Import CSV.
 - Export hanya tersedia untuk administrator. Proses membaca item satu per satu; perubahan dari sesi lain selama export tidak membentuk snapshot serentak seluruh database.
 
 ## Import CSV

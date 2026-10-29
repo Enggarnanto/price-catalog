@@ -1,7 +1,7 @@
 {
   "slug": "price-catalogs",
-  "version": "2.3.0",
-  "download_url": "https://github.com/Enggarnanto/price-catalog/releases/download/v2.3.0/latis-price-catalogs-2.3.0.zip",
+  "version": "2.4.0",
+  "download_url": "https://github.com/Enggarnanto/price-catalog/releases/download/v2.4.0/latis-price-catalogs-2.4.0.zip",
   "requires": "6.2",
   "requires_php": "8.1",
   "sha256": "GANTI_DENGAN_SHA256_ZIP_RILIS",

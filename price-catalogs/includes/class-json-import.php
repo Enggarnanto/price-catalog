@@ -29,7 +29,7 @@ final class LPM_JSON_Import {
             if(($document['version']??null)!==1)throw new InvalidArgumentException('Versi format export JSON tidak didukung.');
             $type=$document['resource_type']??'';$items=$document['resources']??null;
         }elseif(isset($document['content'],$document['metadata'])){
-            $type=$document['resource_type']??(isset($document['content']['headers'])?'price_table':'price_catalog');$items=[$document];
+            $type=$document['resource_type']??(isset($document['content']['headers'])?'price_table':(isset($document['content']['mode'],$document['content']['items'])?'price_catalog':''));$items=[$document];
         }else throw new InvalidArgumentException('Gunakan JSON hasil Export Data atau Unduh Cadangan plugin.');
         if(!is_string($type)||!is_array($items)||!array_is_list($items)||count($items)<1||count($items)>200)throw new InvalidArgumentException('JSON membutuhkan 1–200 resource.');
         $records=[];$ids=[];
@@ -48,15 +48,16 @@ final class LPM_JSON_Import {
         LPM_Service::authorize();if(!in_array($mode,['new','existing'],true))throw new InvalidArgumentException('Mode import tidak valid.');
         $records=self::parse($json);$items=[];
         foreach($records as $index=>$record){
-            $target=['id'=>0,'revision'=>0,'base'=>0,'production'=>0];$error='';
+            $target=['id'=>0,'revision'=>0,'base'=>0,'production'=>0];$error='';$target_name='';
             if($mode==='existing')try{
                 if(!$record['source_id'])throw new InvalidArgumentException('ID sumber diperlukan untuk memperbarui item.');
                 $editor=LPM_Service::editor($record['source_id']);$r=$editor['resource'];
                 if($r['resource_type']!==$record['type'])throw new InvalidArgumentException('Jenis resource tujuan berbeda.');
                 $target=['id'=>(int)$r['id'],'revision'=>(int)$r['draft_revision'],'base'=>(int)$editor['base'],'production'=>(int)$r['production_version_id']];
+                $target_name=$r['name'];if($target_name!==$record['metadata']['name'])$record['warnings'][]='Nama tujuan berbeda dari file. Pastikan ID memang berasal dari situs ini.';
                 if($r['draft_data']!==null)$record['warnings'][]='Draft yang tersimpan pada ID ini akan diganti.';
             }catch(Throwable $e){$error=$e->getMessage();}
-            $items[]=['index'=>$index,'record'=>$record,'target'=>$target,'error'=>$error,'preview_token'=>$error?'':self::signature($record,$target)];
+            $items[]=['index'=>$index,'record'=>$record,'target'=>$target,'target_name'=>$target_name,'error'=>$error,'preview_token'=>$error?'':self::signature($record,$target)];
         }
         return ['items'=>$items,'mode'=>$mode,'file_hash'=>hash('sha256',$json)];
     }

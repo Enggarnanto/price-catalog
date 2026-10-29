@@ -1,3 +1,11 @@
+## 2.4.0 - 2026-10-29
+
+- Add Import JSON for exported table/catalog collections and single local backups, with full validation, destination preview, per-item selection and results.
+- Support creating new IDs or updating existing IDs as drafts; preserve metadata, descriptions, original visibility, prices, formatting, links and CTA without changing production/history.
+- Add signed preview targets, revision/base/production conflict checks and atomic import receipts for idempotent retry, including concurrent and lost-response cases. Database schema 5 adds import_operations; snapshot schema stays unchanged.
+- Warn about existing draft replacement and mismatched destination names. Clear mismatched/foreign media IDs and require Media Library reselection before catalog publication.
+- Validate against the actual 18-program JSON and isolated WordPress/database/browser regressions. No production imports were performed.
+
 ## 2.3.0 - 2026-10-29
 
 - Add a dedicated Updater settings page with disabled-by-default GitHub Releases source (Enggarnanto/price-catalog), optional HTTPS manifest source, manual check, installed/latest version, check timestamp, requirements and native WordPress update links.
