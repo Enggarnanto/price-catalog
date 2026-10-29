@@ -54,6 +54,7 @@ for institution, source in sources.items():
     institution_records = []
     for resource in original['resources']:
         tokens = resource['metadata']['name'].split('_')
+        assert institution in tokens, resource['metadata']['name']
         curriculum_key, curriculum_label = curricula[tokens[0]]
         code = next(code for code in programs if code in tokens)
         program, headers = programs[code]
