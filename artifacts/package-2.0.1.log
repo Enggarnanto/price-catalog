@@ -1,0 +1,8 @@
+PASS ZIP CRC
+PASS ZIP matches all source files byte-for-byte
+PASS Only plugin source/assets/docs included (no runtime/tests/configuration/credentials/logs)
+PASS Header and asset version 2.0.1
+PASS PHP files have no UTF-8 BOM
+FILES 23
+BYTES 54768
+SHA256 776d76e4de04e4b2d6258ae15e70532f65bda9ed1d24133eeab897e77a25498e

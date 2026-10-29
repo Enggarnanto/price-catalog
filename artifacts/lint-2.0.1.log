@@ -1,0 +1,16 @@
+No syntax errors detected in price-catalogs\price-catalogs.php
+No syntax errors detected in price-catalogs\includes\class-admin.php
+No syntax errors detected in price-catalogs\includes\class-cache.php
+No syntax errors detected in price-catalogs\includes\class-content-v2.php
+No syntax errors detected in price-catalogs\includes\class-csv.php
+No syntax errors detected in price-catalogs\includes\class-database.php
+No syntax errors detected in price-catalogs\includes\class-legacy-content.php
+No syntax errors detected in price-catalogs\includes\class-legacy-renderer.php
+No syntax errors detected in price-catalogs\includes\class-renderer-v2.php
+No syntax errors detected in price-catalogs\includes\class-schema.php
+No syntax errors detected in price-catalogs\includes\class-service.php
+No syntax errors detected in price-catalogs\includes\class-styling.php
+No syntax errors detected in price-catalogs\includes\class-usage.php
+PASS node --check price-catalogs\assets\admin.js
+PASS node --check price-catalogs\assets\carousel.js
+PASS node --check price-catalogs\assets\grid-tools.js

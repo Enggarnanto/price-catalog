@@ -1,0 +1,51 @@
+const {chromium}=require('C:/Users/Megatron/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const fixture=JSON.parse(fs.readFileSync('tests/runtime/writer-fixture.json','utf8'));let checks=0;
+const check=(v,label)=>{assert.ok(v,label);console.log('PASS '+(++checks)+' '+label);};
+(async()=>{
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+try{
+ const context=await browser.newContext({viewport:{width:1280,height:900},permissions:['clipboard-read','clipboard-write']}),page=await context.newPage(),errors=[];
+ page.on('pageerror',e=>{errors.push(e.message);console.log('BROWSER ERROR',e.stack);});
+ await page.goto('http://127.0.0.1:18317/writer?_writer_test=1');
+ await page.waitForFunction(()=>window.LPMWriterPicker&&wp.plugins.getPlugin('lpm-pricelist'));
+ check(await page.evaluate(()=>wp.plugins.getPlugin('lpm-pricelist').render().props.title)==='Pricelist','Panel registers with real WordPress plugin API');
+ const open=async()=>{await page.locator('.lpm-writer-open').click();await page.waitForSelector('[data-insert]');};
+ const search=async value=>{await page.locator('[name=search]').fill(value);await page.locator('.lpm-writer-search').evaluate(form=>form.requestSubmit());await page.waitForFunction(()=>!document.querySelector('[data-results]').hasAttribute('aria-busy'));};
+ await page.locator('#content').evaluate(el=>{el.focus();el.setSelectionRange(el.value.length,el.value.length);});
+ await open();await search('Writer shortcut');
+ check(await page.locator('.lpm-writer-item').count()===1,'Author picker receives only published, undeleted matches from real API');
+ check(await page.locator('.lpm-writer-item').innerText().then(t=>!t.includes('Writer shortcut draft')&&!t.includes('Writer shortcut deleted')),'Draft and deleted titles are absent');
+ await page.screenshot({path:'artifacts/writer-desktop-2.0.4.png'});
+ await page.locator('[data-copy]').click();
+ check(await page.evaluate(()=>navigator.clipboard.readText())===`[latis_price_table id="${fixture.ids.published}"]`,'Copy button writes the stable shortcode');
+ await page.locator('[data-insert]').click();
+ check(await page.locator('#content').inputValue()===`Artikel awal.\n[latis_price_table id="${fixture.ids.published}"]\n`,'Classic text editor receives shortcode at saved cursor position');
+ check(await page.locator('dialog').count()===0,'Picker closes after successful insertion');
+ await page.locator('#block-picker').click();await page.waitForSelector('[data-insert]');await search('Writer shortcut');await page.locator('[data-insert]').click();
+ check(await page.evaluate(()=>{const blocks=wp.data.select('core/block-editor').getBlocks();return blocks.length===1&&blocks[0].name==='core/shortcode'&&blocks[0].attributes.text.includes('latis_price_table');}),'Gutenberg insertion creates a real core/shortcode block in WordPress store');
+ await page.evaluate(()=>wp.data.dispatch('core/block-editor').updateSettings({allowedBlockTypes:[]}));
+ await page.locator('#block-picker').click();await page.waitForSelector('[data-insert]');await search('Writer shortcut');await page.locator('[data-insert]').click();
+ check(await page.locator('dialog').count()===1&&(await page.locator('[data-status]').innerText()).includes('membatasi blok'),'Locked block settings retain picker and explain copy fallback');
+ await page.locator('[data-close]').click();await page.evaluate(()=>wp.data.dispatch('core/block-editor').updateSettings({allowedBlockTypes:true}));
+ await open();await search('Writer shortcut draft');
+ check(await page.locator('[data-insert]').count()===0&&(await page.locator('[data-status]').innerText()).includes('Belum ada'),'Unpublished-only search shows clear empty state');
+ await page.locator('[name=type]').selectOption('price_catalog');await page.waitForFunction(()=>!document.querySelector('[data-results]').hasAttribute('aria-busy'));
+ check((await page.locator('[data-status]').innerText()).includes('Belum ada'),'Catalog filter uses same published library safely');
+ await page.keyboard.press('Escape');await page.locator('dialog').waitFor({state:'detached'});check(await page.locator('dialog').count()===0,'Escape closes accessible picker');
+ await page.setViewportSize({width:390,height:844});await open();await search('Writer shortcut');
+ check(await page.locator('dialog').evaluate(el=>el.scrollWidth<=el.clientWidth)&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile picker fits viewport without horizontal overflow');
+ await page.screenshot({path:'artifacts/writer-mobile-2.0.4.png'});
+ await page.locator('[data-close]').click();
+ await page.goto('http://127.0.0.1:18317/writer?_writer_test=1&plain=1');await page.waitForFunction(()=>window.LPMWriterPicker);
+ await open();await search('Writer shortcut');
+ check(await page.locator('.lpm-writer-item').count()===1,'Plain-permalink REST URL also supports search and author permissions');
+ await page.keyboard.press('Escape');
+ // Old WordPress releases export the panel through wp.editPost instead.
+ const vm=require('node:vm');let registered;
+ vm.runInNewContext(fs.readFileSync('price-catalogs/assets/writer-block.js','utf8'),{wp:{element:{createElement:(type,props,...children)=>({type,props,children})},editPost:{PluginDocumentSettingPanel:'legacy-panel'},components:{Button:'button'},plugins:{registerPlugin:(name,plugin)=>registered=plugin}},LPMWriterPicker:{open(){}}});
+ check(registered.render().type==='legacy-panel','WordPress legacy panel namespace fallback works');
+ check(errors.length===0,'No browser JavaScript errors: '+errors.join(', '));
+ console.log('SUCCESS '+checks+' writer-browser checks with real WordPress packages, block store and author REST API.');
+}finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

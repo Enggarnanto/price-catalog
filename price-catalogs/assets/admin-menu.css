@@ -1,0 +1,16 @@
+/* Restrict branding to our own sidebar icon on every WordPress admin screen. */
+#adminmenu #toplevel_page_lpm > a .wp-menu-image {
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+}
+#adminmenu #toplevel_page_lpm > a .wp-menu-image img {
+    display: block;
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    padding: 0;
+    margin: 7px auto 0;
+    object-fit: contain;
+}

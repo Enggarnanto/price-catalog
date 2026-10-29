@@ -1,0 +1,83 @@
+PASS Schema installed and InnoDB verified
+PASS Unpublished resource renders empty
+PASS Saving initial draft does not expose it publicly
+PASS V1 published through stable shortcode
+PASS Lost-response retry creates exactly one version
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Operation key cannot be reused with different payload [LPM_Conflict]
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Old editor cannot save after publish clears draft [LPM_Conflict]
+PASS Saved changes leave published price unchanged
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Stale draft revision rejected [LPM_Conflict]
+LPM operation failed: resource=37 category=RuntimeException
+PASS Failure injection after_snapshot [RuntimeException]
+PASS Full rollback preserves resource, history and outbox at after_snapshot
+LPM operation failed: resource=37 category=RuntimeException
+PASS Failure injection after_pointer [RuntimeException]
+PASS Full rollback preserves resource, history and outbox at after_pointer
+LPM operation failed: resource=37 category=RuntimeException
+PASS Failure injection before_commit [RuntimeException]
+PASS Full rollback preserves resource, history and outbox at before_commit
+PASS V2 activates after failed attempts
+PASS V1 snapshot remains immutable
+LPM operation failed: resource=37 category=RuntimeException
+PASS Lost database connection aborts publication [RuntimeException]
+PASS Lost connection cannot replay writes outside the transaction
+PASS Restore V1 creates V3 and activates original content
+PASS Restore preserves existing draft and makes it stale
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Stale draft cannot overwrite restored production [LPM_Conflict]
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Normal save cannot silently change draft base [LPM_Conflict]
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Reconciliation against old production rejected [LPM_Conflict]
+PASS Explicit reconciliation updates base
+PASS Reconciled draft publishes V4 with full history
+LPM operation failed: resource=37 category=InvalidArgumentException
+PASS Restoring active production is rejected [InvalidArgumentException]
+PASS Cross-resource version reference rejected [InvalidArgumentException]
+LPM cache event failed: event=101
+PASS Cache failure leaves successful production and durable retry event
+PASS Cache retry completes pending outbox event
+PASS Completed cache events are not processed again
+PASS Canonical JSON ignores object key order
+PASS Canonical JSON preserves item ordering
+PASS Semantic compare detects reordering
+LPM operation failed: resource=37 category=InvalidArgumentException
+PASS Executable CTA URL rejected [InvalidArgumentException]
+LPM operation failed: resource=37 category=InvalidArgumentException
+PASS HTML payload rejected [InvalidArgumentException]
+LPM operation failed: resource=37 category=InvalidArgumentException
+PASS Arbitrary CSS rejected [InvalidArgumentException]
+PASS Oversized payload rejected [InvalidArgumentException]
+PASS Unsupported schema fails closed [InvalidArgumentException]
+PASS Renderer escapes output and protects new-tab links
+PASS Public shortcode cannot select archived version
+PASS Catalog snapshot preserves ordered images, URLs, CTA and captions
+PASS Catalog shortcode renders published cards
+PASS Deleted media renders safe placeholder
+LPM operation failed: resource=39 category=InvalidArgumentException
+PASS Missing mandatory attachment blocks publish [InvalidArgumentException]
+PASS REST private read requires nonce
+PASS Unauthenticated user cannot read draft
+PASS Service blocks unauthorized mutation [RuntimeException]
+PASS Subscriber cannot preview private snapshot
+PASS Authorized preview returns renderer, semantic diff and review proof
+PASS Publish endpoint requires matching review proof
+PASS Private REST responses carry no-store and noindex headers
+PASS Reviewed REST request publishes successfully
+PASS Reviewed REST retry replays original result
+PASS History pagination excludes large snapshot payloads
+LPM operation failed: resource=37 category=LPM_Conflict
+PASS Restore review becomes invalid if draft changes
+PASS Two independent connections: one save succeeds, one conflicts
+PASS Two independent connections: one publish succeeds, no silent overwrite
+PASS Concurrent publish versus restore cannot silently overwrite
+PASS Deactivation preserves draft, production and immutable history
+PASS Non-InnoDB table blocks mutations [RuntimeException]
+PASS Schema reinstall preserves immutable history
+LPM render unavailable resource=38 category=InvalidArgumentException
+PASS Corrupt cross-resource production pointer fails closed
+
+SUCCESS: 63 checks passed on WordPress + MySQL/InnoDB.

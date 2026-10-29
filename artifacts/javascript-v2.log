@@ -1,0 +1,23 @@
+PASS 1 Spreadsheet paste handles tabs and CRLF without trailing empty record
+PASS 2 Spreadsheet paste preserves quoted multiline cells
+PASS 3 Quoted delimiters and escaped quotes preserved
+PASS 4 Trailing empty cell preserved
+PASS 5 Unclosed paste quote rejected
+PASS 6 Horizontal transpose preserves headers and prices
+PASS 7 Transpose is reversible without data loss
+PASS 8 Carousel enhancement initially shows the first slide
+PASS 9 Navigation controls shown only after initialization
+PASS 10 Autoplay enabled only on configured carousel
+PASS 11 Next button changes visible slide
+PASS 12 Two carousels maintain independent state
+PASS 13 Arrow key navigation works
+PASS 14 Horizontal swipe changes slide
+PASS 15 User interaction pauses autoplay
+PASS 16 Explicit play control resumes autoplay
+PASS 17 Hover pauses autoplay
+PASS 18 Mouse leave resumes eligible autoplay
+PASS 19 Keyboard focus pauses autoplay
+PASS 20 Focus leaving resumes eligible autoplay
+PASS 21 Reduced motion disables autoplay
+PASS 22 Repeated initialization does not attach duplicate carousels
+SUCCESS: 22 JavaScript logic checks passed (no visual browser assertion).

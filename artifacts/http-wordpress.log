@@ -1,0 +1,27 @@
+PASS 1 Native WordPress login page loads
+PASS 2 Native login cookies authorize real plugin admin screen
+PASS 3 WordPress enqueues localized plugin configuration
+PASS 4 Normal admin screen supplies capabilities and screen config
+PASS 5 Updated admin asset is cache-busted to version 2
+PASS 6 Browser can download admin JavaScript from actual plugin URL
+PASS 7 Grid and carousel dependencies are enqueued and downloadable in real WordPress
+PASS 8 Cookie-authenticated library works with plain permalink REST
+PASS 9 Real WordPress authentication rejects invalid nonce
+PASS 10 Create resource through normal authenticated REST
+PASS 11 Draft saves with real login cookies and nonce
+PASS 12 Separate HTTP request reopens the persisted draft
+PASS 13 Existing draft updates through real WordPress
+PASS 14 Updated draft survives another HTTP reload
+PASS 15 Server preview provides review proof with normal authentication
+PASS 16 Publish succeeds under actual WordPress cookie/nonce authentication
+PASS 17 Native WordPress REST creates test article with stable shortcode
+PASS 18 Native WordPress REST creates test article with stable shortcode
+PASS 19 Both anonymous frontend article requests render the published price
+PASS 20 Saving updated draft leaves both public articles unchanged
+PASS 21 Server preview provides review proof with normal authentication
+PASS 22 Update publishes V2 through actual WordPress
+PASS 23 One price publication updates both anonymous article renders
+PASS 24 Horizontal orientation is present on normal frontend page
+PASS 25 Native post-save hooks index both article usages
+PASS 26 Real preview HTTP response prohibits public caching/indexing
+SUCCESS: 26 actual WordPress HTTP checks passed.

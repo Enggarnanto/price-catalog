@@ -1,0 +1,51 @@
+PASS 1 Save returns the actual persisted draft
+PASS 2 Exit and reopen preserves every grid cell and link
+PASS 3 Internal metadata persists with draft
+PASS 4 Existing draft updates and reopens
+PASS 5 V2 snapshot stores schema version 2
+PASS 6 Vertical table and cell links render
+PASS 7 Orientation draft does not affect production
+PASS 8 Horizontal mode transposes packages into columns
+PASS 9 Horizontal transpose preserves cell positions
+PASS 10 One price update changes both article renders
+PASS 11 Both articles retain unchanged shortcode content
+PASS 12 Usage index counts unique posts/pages
+PASS 13 Usage parser supports unquoted IDs, deduplicates and excludes escaped shortcode
+PASS 14 Synced block references count on parent articles
+PASS 15 Editing synced block refreshes dependent articles
+PASS 16 Synced block cycles are detected without recursion failure
+PASS 17 Trashed post removed from usage
+PASS 18 Restored post returns to usage
+PASS 19 Deleted post removed from usage
+PASS 20 Batch rebuild reaches complete status
+PASS 21 CSV handles BOM, semicolon, quoted delimiter and newline
+PASS 22 CSV comma parser returns matrix
+PASS 23 CSV can generate headers
+PASS 24 Inconsistent CSV columns rejected
+PASS 25 Unclosed CSV quote rejected
+PASS 26 CSV markup is not executable
+PASS 27 Oversized CSV rejected
+PASS 28 CSV replacement saves only draft
+PASS 29 CSV preserves metadata and individual styling
+PASS 30 Global styling affects inherited published resource
+PASS 31 Individual styling overrides global
+PASS 32 Arbitrary global CSS rejected
+PASS 33 Legacy CTA maps losslessly into action cell
+PASS 34 Legacy production continues rendering without migration writes
+LPM operation failed: resource=42 category=InvalidArgumentException
+PASS 35 Migrated table requires choosing program
+PASS 36 Publishing upgraded draft preserves immutable v1 snapshot
+PASS 37 Single image supports independent image hyperlink and CTA
+PASS 38 Carousel rejects fewer than two slides
+PASS 39 Carousel output includes all slides and navigation for progressive enhancement
+PASS 40 Single rejects multiple images
+PASS 41 Executable image hyperlink rejected
+PASS 42 Search and type filters work on actual MySQL metadata query
+PASS 43 Program filter query succeeds
+PASS 44 Catalog mode filter query succeeds
+PASS 45 Author library contains only published resources and no draft fields
+PASS 46 Author cannot read editor draft
+PASS 47 Author can preview published resource
+PASS 48 Author cannot mutate pricing
+PASS 49 Usage detail hides another user private draft
+SUCCESS: 49 product-v2 checks passed.

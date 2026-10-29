@@ -1,0 +1,21 @@
+LPM operation failed: resource=62 category=LPM_Persistence_Error
+PASS 1 Save cannot acknowledge a rolled-back transaction as success
+PASS 2 Failed save leaves persistent resource unchanged
+PASS 3 Save succeeds only with independent committed-state verification
+PASS 4 Independent connection reads all 10 levels and 30 prices plus title
+LPM operation failed: resource=62 category=LPM_Persistence_Error
+PASS 5 Publish cannot acknowledge an empty commit as V1 success
+PASS 6 Rejected publication has no phantom production/history
+PASS 7 Corrected publication creates verified V1
+PASS 8 Production pointer and history persist together
+PASS 9 Published snapshot retains every fixture value
+PASS 10 Rollback on shared wpdb connection cannot undo a saved draft
+PASS 11 Literal percent signs survive native SQL without placeholder corruption
+PASS 12 Fixture reproduces stale shared-wpdb reads while primary state remains current
+PASS 13 Editor reads committed draft rather than stale query-cache result
+LPM operation failed: resource=62 category=LPM_Persistence_Error
+PASS 14 Unconfirmed response does not produce a success acknowledgement
+PASS 15 Retry confirms committed V2 exactly once
+LPM operation failed: resource=62 category=LPM_Persistence_Error
+PASS 16 REST save returns 503 when commit durability cannot be verified
+SUCCESS: 16 persistence hotfix checks passed.

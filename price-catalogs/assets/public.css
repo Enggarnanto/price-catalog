@@ -1,0 +1,42 @@
+/* All rules are scoped to plugin resources. */
+.lpm-resource{--lpm-accent:#2563eb;--lpm-header-bg:#172554;--lpm-header-text:#fff;--lpm-background:#fff;--lpm-text:#172033;--lpm-border:#dbe2ec;--lpm-stripe:#f4f7fb;--lpm-button-bg:#2563eb;--lpm-button-text:#fff;--lpm-padding:14px;--lpm-font-size:15px;--lpm-radius:8px;margin:24px 0;color:var(--lpm-text);font-size:var(--lpm-font-size);line-height:1.6}.lpm-resource *{box-sizing:border-box}.lpm-resource h2{margin:0 0 14px;font-size:1.65em}.lpm-scroll{overflow-x:auto;max-width:100%}.lpm-resource .lpm-table{border-collapse:collapse;min-width:100%;width:auto;text-align:left;background:var(--lpm-background);color:var(--lpm-text);font-size:inherit}.lpm-table th,.lpm-table td{padding:var(--lpm-padding);border:1px solid var(--lpm-border);vertical-align:top;min-width:110px}.lpm-table thead th{background:var(--lpm-header-bg);color:var(--lpm-header-text)}.lpm-zebra .lpm-table tbody tr:nth-child(even){background:var(--lpm-stripe)}.lpm-resource a{color:var(--lpm-accent)}.lpm-resource .lpm-cta{display:inline-block;margin:10px 8px 10px 0;padding:10px 18px;background:var(--lpm-button-bg);color:var(--lpm-button-text);border-radius:var(--lpm-radius);text-decoration:none;font-weight:600}.lpm-resource a:focus-visible,.lpm-resource button:focus-visible,.lpm-scroll:focus-visible{outline:3px solid var(--lpm-accent);outline-offset:3px}.lpm-slide{background:var(--lpm-background);padding:var(--lpm-padding);border:1px solid var(--lpm-border);border-radius:var(--lpm-radius);margin-bottom:16px}.lpm-slide[hidden],.lpm-controls[hidden]{display:none!important}.lpm-slide figure{margin:0}.lpm-slide img{display:block;max-width:100%;height:auto;margin:auto}.lpm-slide figcaption{padding:10px 0;font-size:.9em}.lpm-controls{display:flex;gap:14px;align-items:center;justify-content:center}.lpm-controls button{cursor:pointer;border:1px solid var(--lpm-border);border-radius:var(--lpm-radius);padding:10px 16px;background:var(--lpm-button-bg);color:var(--lpm-button-text);font:inherit}.lpm-placeholder{min-height:160px;display:grid;place-items:center;background:#eef1f6;color:#526173}.lpm-price{color:var(--lpm-accent);font-weight:700}.lpm-grid{display:grid;grid-template-columns:repeat(var(--lpm-columns,3),minmax(0,1fr));gap:16px}.lpm-card{border:1px solid var(--lpm-border);border-radius:8px;overflow:hidden}.lpm-card figure{margin:0}.lpm-card img{max-width:100%;height:auto}.lpm-card-body{padding:16px}@media(max-width:600px){.lpm-grid{grid-template-columns:1fr}}
+/* Optional package pricing layout. Every rule stays inside the plugin resource. */
+.lpm-resource .lpm-pricing-card{border:1px solid #e0e7f1;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 12px 28px #17255409}
+.lpm-resource .lpm-pricing-card .lpm-scroll{margin:0;scrollbar-width:thin;overscroll-behavior-x:contain}
+.lpm-resource .lpm-pricing-table{width:100%;min-width:760px;table-layout:fixed;margin:0;border:0;border-spacing:0;border-collapse:separate;background:#fff;color:#0b1e3d;font:inherit;font-size:16px;line-height:1.5;text-align:left}
+.lpm-resource .lpm-pricing-table th,.lpm-resource .lpm-pricing-table td{border:0;border-bottom:1px solid #edf2f8;padding:18px 26px;vertical-align:middle;min-width:180px;background:#fff;color:#0b1e3d;overflow-wrap:anywhere;font-weight:400}
+.lpm-resource .lpm-pricing-table thead th{background:#223d88;color:#fff;border-right:1px solid #ffffff20;border-bottom:0;height:92px;padding:20px 26px;position:relative;font-weight:700}
+.lpm-resource .lpm-package-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lpm-resource .lpm-package-heading>div{min-width:0}
+.lpm-resource .lpm-package-heading small{display:block;font-size:12px;line-height:1.5;color:#c6d9ff;font-weight:400;margin:0 0 5px;text-transform:uppercase}
+.lpm-resource .lpm-package-heading>div>span{display:block;font-size:16px;font-weight:750;text-transform:uppercase}
+.lpm-resource .lpm-package-badge{display:inline-block;background:#244ab3;color:#dbeafe;border-radius:5px;padding:5px 9px;font-size:11px;line-height:1.4;font-weight:600;white-space:nowrap;text-transform:uppercase;letter-spacing:.025em}
+.lpm-resource .lpm-pricing-table thead th.lpm-featured{background:#172554;box-shadow:inset 0 4px #fbbf24}
+.lpm-resource .lpm-pricing-table th.lpm-featured small{color:#facc15;font-weight:600}
+.lpm-resource .lpm-pricing-table th.lpm-featured .lpm-package-badge{color:#0f172a;background:#fbbf24;border-radius:99px}
+.lpm-resource .lpm-pricing-table tbody th{font-weight:650;text-transform:uppercase}
+.lpm-resource .lpm-pricing-table tbody td.lpm-featured{background:#f8fafc;font-weight:600}
+.lpm-resource .lpm-pricing-table tbody tr:last-child>*{border-bottom:0}
+.lpm-resource .lpm-level-dot{display:inline-block;vertical-align:middle;width:7px;height:7px;border-radius:50%;background:var(--lpm-dot,#3b82f6);margin-right:10px;flex-shrink:0}
+.lpm-resource .lpm-currency{color:#8ba3c7;font-size:13px;font-weight:400;margin-right:3px}
+.lpm-resource .lpm-pricing-table a{text-decoration:none;color:inherit}
+.lpm-resource .lpm-pricing-table a:hover{text-decoration:underline}
+.lpm-resource .lpm-pricing-footer{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px;background:#f7f9fc;border-top:1px solid #e2e8f0}
+.lpm-resource .lpm-footer-message{display:flex;align-items:center;gap:14px;min-width:0}
+.lpm-resource .lpm-footer-check{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:50%;background:#d1fae5;color:#059669;font-size:22px;font-weight:600}
+.lpm-resource .lpm-footer-message p{font-size:13px;line-height:1.5;color:#7389ad;margin:0 0 3px}
+.lpm-resource .lpm-footer-message strong{display:block;color:#0b1e3d;font-size:15px;line-height:1.5;font-weight:600;overflow-wrap:anywhere}
+.lpm-resource .lpm-footer-cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex-shrink:0;max-width:100%;padding:14px 24px;min-height:48px;border-radius:14px;background:#059669;color:#fff;font-size:15px;font-weight:700;line-height:1.5;text-decoration:none;box-shadow:0 3px 5px #05966925;text-align:center;overflow-wrap:anywhere}
+.lpm-resource .lpm-footer-cta:hover{background:#047857;color:#fff}
+.lpm-resource .lpm-footer-cta svg{width:16px;height:16px;flex-shrink:0}
+@media(max-width:700px){.lpm-resource .lpm-pricing-card{border-radius:14px}.lpm-resource .lpm-pricing-footer{padding:20px;align-items:stretch;flex-direction:column;gap:18px}.lpm-resource .lpm-footer-cta{width:100%;flex-shrink:1}.lpm-resource .lpm-pricing-table th,.lpm-resource .lpm-pricing-table td{padding:16px 20px}.lpm-resource .lpm-pricing-table thead th{padding:18px 20px}.lpm-resource .lpm-pricing-table tbody th:first-child{position:sticky;left:0;z-index:1;box-shadow:3px 0 5px #0f172a05}}
+.lpm-resource .lpm-pricing-card{font-family:"Plus Jakarta Sans",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.lpm-mobile-view{display:none}.lpm-responsive,.lpm-desktop-view,.lpm-mobile-view{min-width:0;max-width:100%}
+.lpm-resource.lpm-freeze-first .lpm-table{border-collapse:separate;border-spacing:0}
+.lpm-resource.lpm-freeze-first .lpm-table tr>:first-child{position:sticky;left:0;z-index:2;background:var(--lpm-background);box-shadow:3px 0 5px #0f172a12}
+.lpm-resource.lpm-freeze-first .lpm-table thead tr>:first-child{z-index:3;background:var(--lpm-header-bg)}
+.lpm-resource.lpm-freeze-first.lpm-zebra .lpm-table:not(.lpm-pricing-table) tbody tr:nth-child(even)>:first-child{background:var(--lpm-stripe)}
+.lpm-resource.lpm-freeze-first .lpm-pricing-table tbody tr>:first-child{background:#fff}
+.lpm-resource.lpm-freeze-first .lpm-pricing-table thead tr>:first-child{background:#223d88}
+.lpm-resource.lpm-no-freeze .lpm-pricing-table tbody tr>:first-child{position:static;box-shadow:none}
+@media(max-width:700px){.lpm-desktop-view{display:none}.lpm-mobile-view{display:block}.lpm-resource .lpm-table th,.lpm-resource .lpm-table td{overflow-wrap:anywhere}.lpm-resource.lpm-freeze-first .lpm-table tr>:first-child{min-width:130px;max-width:155px;width:150px}.lpm-resource .lpm-scroll{overscroll-behavior-x:contain;scrollbar-width:thin}.lpm-resource .lpm-table{margin:0}}

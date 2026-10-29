@@ -1,0 +1,13 @@
+PASS 1 Real editor script opens existing resource
+PASS 2 Save captures all 10 levels and 30 prices without input events
+PASS 3 Save captures public title directly from rendered form
+PASS 4 False save receipt followed by stale GET displays an error
+PASS 5 Failed readback preserves local backup and last price in editor
+PASS 6 Verified save clears backup only after fresh GET succeeds
+PASS 7 Stale production readback retains pending publish identity and displays error
+PASS 8 Unverified publication offers retry instead of success
+PASS 9 Retry uses original operation key rather than creating another publication
+PASS 10 Confirmed production clears pending operation and shows success
+PASS 11 Post-publication editor keeps every price and public title
+PASS 12 Verified editor displays production V1
+SUCCESS: 12 editor persistence logic checks passed (minimal DOM; no visual browser assertion).
