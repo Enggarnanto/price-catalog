@@ -179,9 +179,9 @@ Klik **Hapus** di daftar, atau **Opsi lainnya ? Hapus tabel/katalog** di editor.
 
 ## Katalog Price
 
-Pilih **Single Image** (tepat satu gambar) atau **Carousel** (2-50 gambar). Gunakan Media Library, atur urutan, alt/caption, hyperlink gambar, serta CTA per gambar. Link gambar dan CTA dapat menuju URL berbeda. Teks judul/harga/deskripsi tambahan tetap tersedia untuk kompatibilitas dan kebutuhan opsional.
+Pada section **1. Gambar & Urutan**, pilih **Single Image** (tepat satu gambar) atau **Carousel** (2-50 gambar). Gunakan Media Library, atur urutan, alt/caption, hyperlink gambar, serta CTA per gambar. Link gambar dan CTA dapat menuju URL berbeda. Teks judul/harga/deskripsi tambahan tetap tersedia untuk kompatibilitas dan kebutuhan opsional.
 
-Gambar memakai tinggi otomatis dan tidak dipaksa crop, sehingga artwork harga tetap terbaca. Carousel memiliki navigasi, indikator, swipe, keyboard, serta opsi autoplay dengan interval 5-120 detik. Autoplay default mati, berhenti pada interaksi/hover/focus, dan menghormati reduced motion. Tanpa JavaScript, semua slide tetap tersedia sebagai galeri berurutan.
+Gambar memakai tinggi otomatis dan tidak dipaksa crop, sehingga artwork harga tetap terbaca. Di bawah frame gambar, indikator titik dan deskripsi berada di kiri, dengan CTA di kanan. Deskripsi per gambar dipakai jika diisi; jika kosong, deskripsi katalog dipakai sesuai pilihan tampilkan deskripsi. CTA per gambar diutamakan; jika kosong, CTA pada Footer & CTA katalog dipakai. Carousel memiliki navigasi titik, swipe, keyboard, serta opsi autoplay dengan interval 5-120 detik di section Gambar & Urutan. Autoplay default mati, berhenti pada interaksi/hover/focus, dan menghormati reduced motion. Tanpa JavaScript, semua slide tetap tersedia sebagai galeri berurutan.
 
 ## Shortcode untuk penulis
 

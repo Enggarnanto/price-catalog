@@ -53,7 +53,7 @@ final class LPM_Renderer {
         $vars=[];foreach($style as $key=>$value){if($key==='zebra'){continue;}$vars[]='--lpm-'.str_replace('_','-',$key).':'.$value.(is_int($value)?'px':'');}
         $out='<section class="lpm-resource'.($style['zebra']?' lpm-zebra':'').(isset($content['table_options'])?($content['table_options']['freeze_first_column']?' lpm-freeze-first':' lpm-no-freeze'):'').'" style="'.esc_attr(implode(';',$vars)).'">';
         if($content['show_title']&&$content['title']!==''){$out.='<h2>'.esc_html($content['title']).'</h2>';}
-        if(($content['show_description']??true)&&$content['description']!==''){$out.='<p>'.nl2br(esc_html($content['description'])).'</p>';}
+        if($type==='price_table'&&($content['show_description']??true)&&$content['description']!==''){$out.='<p>'.nl2br(esc_html($content['description'])).'</p>';}
         if($type==='price_table'&&($content['presentation']['theme']??'classic')==='pricing'&&$content['orientation']==='vertical'){
             return $out.self::pricing($content).'</section>';
         }
@@ -70,16 +70,23 @@ final class LPM_Renderer {
             foreach($content['items'] as $i=>$item){
                 $image=LPM_Content::media_exists($item['attachment_id'])?'<img src="'.esc_url($item['image_url']).'" alt="'.esc_attr($item['alt']).'" loading="lazy" decoding="async">':'<div class="lpm-placeholder" role="img" aria-label="Gambar tidak tersedia">Gambar tidak tersedia</div>';
                 if($item['link']){$image='<a href="'.esc_url($item['link']).'"'.($item['new_tab']?' target="_blank" rel="noopener noreferrer"':'').'>'.$image.'</a>';}
-                $out.='<article class="lpm-slide"'.($carousel?' role="group" aria-label="'.($i+1).' dari '.count($content['items']).'"':'').'><figure>'.$image.($item['caption']?'<figcaption>'.esc_html($item['caption']).'</figcaption>':'').'</figure>';
+                $out.='<article class="lpm-slide"'.($carousel?' role="group" aria-label="'.($i+1).' dari '.count($content['items']).'"':'').'><figure class="lpm-catalog-artwork">'.$image.($item['caption']?'<figcaption>'.esc_html($item['caption']).'</figcaption>':'').'</figure>';
+                $description=$item['description']!==''?$item['description']:(($content['show_description']??true)?$content['description']:'');
+                $cta=$item['cta']['url']!==''?$item['cta']:$content['cta'];
+                $out.='<div class="lpm-catalog-footer"><div class="lpm-catalog-details">'.($carousel?'<div class="lpm-catalog-navigation"></div>':'');
                 if($item['title']){$out.='<h3>'.esc_html($item['title']).'</h3>';}
                 if($item['price']){$out.='<p class="lpm-price">'.esc_html($item['price']).'</p>';}
-                if($item['description']){$out.='<p>'.nl2br(esc_html($item['description'])).'</p>';}
-                $out.=self::cta($item['cta']).'</article>';
+                if($description!==''){$out.='<p class="lpm-catalog-description">'.nl2br(esc_html($description)).'</p>';}
+                $out.='</div>'.self::cta($cta).'</div></article>';
             }
-            if($carousel){$out.='<div class="lpm-controls" hidden><button type="button" data-prev aria-label="Gambar sebelumnya">&#8592;</button><span data-position role="status" aria-live="polite"></span><button type="button" data-next aria-label="Gambar berikutnya">&#8594;</button>'.($content['autoplay']?'<button type="button" data-pause>Pause</button>':'').'</div>';}
+            if($carousel){
+                $out.='<div class="lpm-controls" hidden><div class="lpm-dots" role="group" aria-label="Pilih gambar katalog">';
+                foreach($content['items'] as $i=>$item){$out.='<button type="button" data-slide="'.$i.'" aria-label="Tampilkan gambar '.($i+1).'" aria-pressed="false"></button>';}
+                $out.='</div><span class="lpm-sr-only" data-position role="status" aria-live="polite"></span>'.($content['autoplay']?'<button type="button" data-pause>Pause</button>':'').'</div>';
+            }
             $out.='</div>';
         }
-        return $out.self::cta($content['cta']).'</section>';
+        return $out.($type==='price_table'?self::cta($content['cta']):'').'</section>';
     }
     public static function shortcode(string $type,array $atts): string {
         try{$id=isset($atts['id'])&&ctype_digit((string)$atts['id'])?(int)$atts['id']:0;if(!$id){return '';}$r=LPM_Service::resource($id);if($r['resource_type']!==$type||!$r['production_version_id']){return '';}

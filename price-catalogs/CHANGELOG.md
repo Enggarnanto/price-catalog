@@ -1,3 +1,10 @@
+## 2.4.1 - 2026-10-30
+
+- Katalog memakai frame artwork dengan indikator titik dan deskripsi di kiri bawah, serta CTA di kanan.
+- CTA per gambar menggantikan CTA katalog pada slide tersebut; CTA katalog menjadi fallback tanpa tombol ganda.
+- Mode Single Image/Carousel dan pengaturan autoplay dipindahkan ke section 1 Gambar & Urutan.
+- Navigasi titik, swipe, keyboard, reduced motion, dan galeri tanpa JavaScript tetap tersedia.
+
 ## 2.4.0 - 2026-10-29
 
 - Add Import JSON for exported table/catalog collections and single local backups, with full validation, destination preview, per-item selection and results.
