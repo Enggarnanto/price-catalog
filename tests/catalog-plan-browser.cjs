@@ -5,9 +5,14 @@ const check=(ok,label)=>{assert.ok(ok,label);console.log('PASS '+(++checks)+' '+
 try{
  const page=await browser.newPage({viewport:{width:1280,height:1000}}),fixture=JSON.parse(fs.readFileSync('tests/runtime/editor-fixture.json')),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/price-catalogs/assets/public.css*',route=>new URL(route.request().url()).searchParams.has('ver')?route.continue():route.fulfill({contentType:'text/css',body:fs.readFileSync('tests/fixtures/catalog-before-plan.css','utf8')}));
  await page.goto('http://127.0.0.1:18317/?lpm_resource='+fixture.catalog);
  const idle=()=>page.waitForFunction(()=>document.querySelector('.lpm-editor-shell')&&!document.querySelector('#lpm-root').inert);
  await idle();
+ const iframe=page.frameLocator('#lpm-preview-frame');await iframe.locator('.lpm-controls').waitFor();
+ check(await iframe.locator('link[rel="stylesheet"]').getAttribute('href').then(x=>x.includes('ver=2.4.2')),'Preview stylesheet URL carries the plugin version');
+ check(await iframe.locator('script[src]').getAttribute('src').then(x=>x.includes('ver=2.4.2')),'Preview carousel URL carries the plugin version');
+ check(await iframe.locator('.lpm-catalog-footer').first().evaluate(e=>getComputedStyle(e).display==='flex'),'Preview loads current layout even when unversioned CSS is cached from 2.4.0');
  check(await page.locator('#lpm-pane-data [data-path="mode"]').isVisible(),'Catalog mode is visible in section 1 on opening');
  check(await page.locator('#lpm-pane-settings [data-path="mode"]').count()===0,'Settings section has no duplicate mode selector');
  check(await page.locator('#lpm-pane-data [data-path="autoplay"]').isVisible(),'Carousel autoplay is alongside catalog mode');
@@ -20,7 +25,8 @@ try{
   const render=async content=>(await(await fetch(LPM.root+'/preview',{method:'POST',headers:h,body:JSON.stringify({type:'price_catalog',content})})).json()).html;
   const carousel=await render(c);c.mode='single';c.items=c.items.slice(0,1);c.items[0].description='';const single=await render(c);
   c.show_description=false;const hidden=await render(c);
-  return {carousel,single,hidden};
+  c.mode='carousel';c.autoplay=true;c.show_description=true;c.items=Array.from({length:4},(_,n)=>({...c.items[0],description:'Deskripsi paket '+(n+1)}));const autoplay=await render(c);
+  return {carousel,single,hidden,autoplay};
  },fixture.catalog);
  const preview=await browser.newPage({viewport:{width:600,height:900}});preview.on('pageerror',e=>errors.push(e.message));
  const html=body=>'<!doctype html><html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="http://127.0.0.1:18317/price-catalogs/assets/public.css"><body style="margin:0;padding:20px;font-family:Arial">'+body+'</body></html>';
@@ -47,6 +53,20 @@ try{
  check(await preview.locator('[data-slide],.lpm-controls').count()===0&&await preview.locator('.lpm-cta').count()===1,'Single mode has one CTA and no carousel controls');
  check((await preview.locator('.lpm-catalog-description').textContent())==='Keterangan katalog umum','Catalog description appears below artwork when slide description is empty');
  await preview.setContent(html(rendered.hidden));check(await preview.locator('.lpm-catalog-description').count()===0,'Hide description setting still hides catalog-level description');
+ await preview.setContent(html(rendered.autoplay));
+ await preview.addStyleTag({content:'.entry-content button,.entry-content .lpm-controls button{padding:12px 20px;min-width:60px;min-height:44px;border-radius:8px;background:#2563eb;color:white}.entry-content article{padding:20px;border:1px solid #ddd}.entry-content footer{display:block;padding:25px;background:#eee}.entry-content .lpm-cta{display:block;width:100%;margin:15px 0}.entry-content p{margin:20px}'});
+ await preview.locator('body').evaluate(e=>e.classList.add('entry-content'));
+ await preview.addScriptTag({url:'http://127.0.0.1:18317/price-catalogs/assets/carousel.js'});
+ check(await layout(),'Footer survives typical theme article, footer, button and CTA styles');
+ check(await preview.locator('[data-slide]').first().evaluate(e=>{const s=getComputedStyle(e),d=getComputedStyle(e,'::before');return s.width==='18px'&&s.padding==='0px'&&s.backgroundColor==='rgba(0, 0, 0, 0)'&&d.width==='8px'&&d.height==='8px'&&d.borderRadius==='50%';}),'Theme styles cannot enlarge dots into blue buttons');
+ check(await preview.locator('[data-position]').evaluate(e=>e.getBoundingClientRect().width===1&&getComputedStyle(e).overflow==='hidden'),'Page counter stays visually hidden');
+ check(await preview.locator('[data-pause]').evaluate(e=>e.textContent===''&&e.getBoundingClientRect().width===24&&e.querySelector('svg')),'Autoplay control is a compact icon instead of a large Pause button');
+ await preview.locator('[data-pause]').click();check(await preview.locator('[data-pause]').getAttribute('aria-label')==='Putar slideshow','Autoplay icon exposes accessible paused state');
+ await preview.locator('[data-pause]').click();check(await preview.locator('[data-pause]').getAttribute('aria-label')==='Jeda slideshow','Autoplay icon resumes without script errors');
+ await preview.locator('body').click({position:{x:2,y:2}});
+ await preview.screenshot({path:'artifacts/catalog-plan-autoplay-mobile-2.4.2.png',fullPage:true});
+ await preview.setViewportSize({width:600,height:900});check(await layout(),'Four-slide autoplay footer also fits desktop');
+ await preview.screenshot({path:'artifacts/catalog-plan-autoplay-desktop-2.4.2.png',fullPage:true});
  await page.locator('[data-path="mode"]').selectOption('single');await page.locator('dialog button[value="ok"]').click();await idle();
  check(await page.locator('[data-path="mode"]').inputValue()==='single'&&await page.locator('.lpm-image-item').count()===1,'Switching to single keeps the selected image');
  await page.locator('[data-act="undo-mode"]').click();await idle();

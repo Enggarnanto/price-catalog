@@ -82,7 +82,7 @@ final class LPM_Renderer {
             if($carousel){
                 $out.='<div class="lpm-controls" hidden><div class="lpm-dots" role="group" aria-label="Pilih gambar katalog">';
                 foreach($content['items'] as $i=>$item){$out.='<button type="button" data-slide="'.$i.'" aria-label="Tampilkan gambar '.($i+1).'" aria-pressed="false"></button>';}
-                $out.='</div><span class="lpm-sr-only" data-position role="status" aria-live="polite"></span>'.($content['autoplay']?'<button type="button" data-pause>Pause</button>':'').'</div>';
+                $out.='</div><span class="lpm-sr-only" data-position role="status" aria-live="polite"></span>'.($content['autoplay']?'<button type="button" data-pause aria-label="Jeda slideshow" title="Jeda slideshow"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 3h3v10H4zM9 3h3v10H9z"/></svg></button>':'').'</div>';
             }
             $out.='</div>';
         }

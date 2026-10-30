@@ -1,3 +1,9 @@
+## 2.4.2 - 2026-10-30
+
+- Versikan URL CSS dan JavaScript pada iframe preview agar browser tidak memakai tampilan katalog lama sesudah update.
+- Perkuat CSS katalog terhadap style tombol dan artikel dari tema: titik kecil di kiri, angka halaman tersembunyi, CTA rata kanan di luar frame gambar.
+- Ganti tombol Pause besar dengan ikon autoplay kecil yang tetap memiliki label aksesibel.
+
 ## 2.4.1 - 2026-10-30
 
 - Katalog memakai frame artwork dengan indikator titik dan deskripsi di kiri bawah, serta CTA di kanan.

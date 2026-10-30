@@ -170,9 +170,10 @@
     const frame=root.querySelector('#lpm-preview-frame');if(!frame)return;
     previewToken=crypto.randomUUID();previewHeight=320;
     const css=LPM.publicCss||new URL('public.css',document.querySelector('link[href*="admin.css"]')?.href||location.href).href;
-    const carousel=LPM.publicScript||new URL('carousel.js',css).href;
+    const versioned=url=>{const asset=new URL(url,location.href);asset.searchParams.set('ver',LPM.version);return asset.href;};
+    const publicCss=versioned(css),carousel=versioned(LPM.publicScript||new URL('carousel.js',css).href);
     const script=`const token=${JSON.stringify(previewToken)};function report(){parent.postMessage({type:'lpm-preview-height',token,height:Math.ceil(document.body.getBoundingClientRect().height)},'*');}new ResizeObserver(report).observe(document.body);addEventListener('load',report);document.addEventListener('click',e=>{if(e.target.closest('a'))e.preventDefault();});`;
-    frame.srcdoc='<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="'+esc(css)+'"><style>html{margin:0}body{margin:0;padding:16px;background:#fff;font:15px/1.5 Arial,sans-serif;box-sizing:border-box}.lpm-resource{margin:0}img{max-width:100%}body>p{padding:16px}</style><body>'+result.html+'<script src="'+esc(carousel)+'"></script><script>'+script+'</script></body></html>';
+    frame.srcdoc='<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="'+esc(publicCss)+'"><style>html{margin:0}body{margin:0;padding:16px;background:#fff;font:15px/1.5 Arial,sans-serif;box-sizing:border-box}.lpm-resource{margin:0}img{max-width:100%}body>p{padding:16px}</style><body>'+result.html+'<script src="'+esc(carousel)+'"></script><script>'+script+'</script></body></html>';
     sizePreview();status.textContent='Preview isian terbaru · belum mengubah versi yang terbit. Geser panel untuk melihat seluruh isi.';
    }catch(e){if(version===previewVersion&&root.querySelector('#lpm-preview-status'))root.querySelector('#lpm-preview-status').textContent='Preview belum diperbarui: '+e.message;}
   },350);

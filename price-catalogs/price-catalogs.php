@@ -3,7 +3,7 @@
  * Plugin Name: Latis Price Catalogs
  * Plugin URI: https://www.mtalkblog.com/p/plugin-price-catalogs.html
  * Description: Versioned price tables and image catalogs with safe publishing and restore.
- * Version: 2.4.1
+ * Version: 2.4.2
  * Update URI: https://www.mtalkblog.com/p/plugin-price-catalogs.html
  * Requires at least: 6.2
  * Requires PHP: 8.1
@@ -14,7 +14,7 @@
  */
 defined('ABSPATH') || exit;
 define('LPM_FILE', __FILE__);
-define('LPM_VERSION', '2.4.1');
+define('LPM_VERSION', '2.4.2');
 foreach (['schema', 'database', 'legacy-content', 'styling', 'money', 'content-v2', 'service', 'legacy-renderer', 'renderer-v2', 'cache', 'usage', 'csv', 'json-import', 'shortcode', 'admin', 'writer', 'updater'] as $lpm_part) {
     require_once __DIR__ . '/includes/class-' . $lpm_part . '.php';
 }

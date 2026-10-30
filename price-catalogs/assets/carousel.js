@@ -5,7 +5,7 @@
         controls.hidden=false;let index=0,timer=null,userPaused=false,hover=false,focused=false;const reduced=matchMedia('(prefers-reduced-motion: reduce)'),pause=g.querySelector('[data-pause]'),position=g.querySelector('[data-position]'),dots=[...g.querySelectorAll('[data-slide]')];
         function show(n){index=(n+slides.length)%slides.length;slides.forEach((s,i)=>{s.hidden=i!==index;});position.textContent=(index+1)+' / '+slides.length;dots.forEach((dot,i)=>dot.setAttribute('aria-pressed',String(i===index)));const navigation=slides[index].querySelector('.lpm-catalog-navigation');if(navigation)navigation.append(controls);}
         function schedule(){clearInterval(timer);timer=null;const active=g.dataset.autoplay==='1'&&!userPaused&&!hover&&!focused&&!reduced.matches&&!document.hidden;
-            position.setAttribute('aria-live',active?'off':'polite');if(pause)pause.textContent=userPaused?'Putar':'Pause';
+            position.setAttribute('aria-live',active?'off':'polite');if(pause){const label=userPaused?'Putar slideshow':'Jeda slideshow';pause.setAttribute('aria-label',label);pause.title=label;if(!pause.querySelector('path'))pause.innerHTML='<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor"/></svg>';pause.querySelector('path').setAttribute('d',userPaused?'M4 2l9 6-9 6z':'M4 3h3v10H4zM9 3h3v10H9z');}
             if(active)timer=setInterval(()=>show(index+1),Math.max(5,Number(g.dataset.interval))*1000);
         }
         function manual(n){const focus=document.activeElement,restore=controls.contains(focus);userPaused=true;show(n);if(restore)focus.focus({preventScroll:true});schedule();}

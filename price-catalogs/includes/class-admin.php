@@ -35,7 +35,7 @@ final class LPM_Admin {
             wp_enqueue_script('lpm-admin', plugins_url('assets/admin.js', LPM_FILE), ['jquery', 'media-editor','lpm-carousel','lpm-grid-tools','lpm-export-tools'], LPM_VERSION, true);
             wp_localize_script('lpm-admin', 'LPM', ['root' => esc_url_raw(rest_url('lpm/v1')), 'nonce' => wp_create_nonce('wp_rest'),
                 'canManage'=>current_user_can('manage_options'),'screen'=>sanitize_key($_GET['page']??'lpm'),'styling'=>LPM_Styling::get(),'logo'=>self::logo_url(),'version'=>LPM_VERSION,'author'=>'Galih Enggarnanto',
-                'publicCss'=>plugins_url('assets/public.css',LPM_FILE),'publicScript'=>plugins_url('assets/carousel.js',LPM_FILE),
+                'publicCss'=>add_query_arg('ver',LPM_VERSION,plugins_url('assets/public.css',LPM_FILE)),'publicScript'=>add_query_arg('ver',LPM_VERSION,plugins_url('assets/carousel.js',LPM_FILE)),
                 'updaterUrl'=>LPM_Updater::can_manage()?LPM_Updater::page_url():'']);
         });
         add_action('rest_api_init', [self::class, 'routes']);
